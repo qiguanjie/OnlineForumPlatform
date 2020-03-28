@@ -1,4 +1,4 @@
-## Flask(Python Web)实战系列之在线论坛系统 第一讲
+## 小白都能看懂的实战教程 手把手教你Python Web全栈开发 Flask(Python Web)实战系列之在线论坛系统    第一讲
 本系列博客将手把手带你进行开发一个在线论坛系统，全程记录一个Python Web开发的全过程，服务端使用Python Web的Flask框架进行开发，数据库采用MySQL，前端采用HTML/CSS/JavaScript/Bootstrap来进行开发。使用Pycharm进行开发，最后会有部署到Linux服务器的教程系列。这个这个项目源码在GitHub上进行开源，本项目的GitHub地址为：[OnlineForumPlatform](https://github.com/qiguanjie/OnlineForumPlatform),大家可以去clone全部源码，喜欢的话，也欢迎大家star一下。
    如果对Flask还没学习过的同学，可以看我之前的一篇Flask博客，一年多前写的了，写的不是太好，但是总体顺序还是能够看懂Flask是如何运行的，可以进行上手，博客地址为：[Flask学习（一）博客地址](https://blog.csdn.net/qq_43422111/article/details/104304290)
    如果对BootStrap不会使用的同学可以看我前几天的博客，有Bootstrap手把手教学，让你快速上手使用BootStrap，博客地址为：[一文教会你Bootstrap，让你也可以快速建站](https://blog.csdn.net/qq_43422111/article/details/105098288)
