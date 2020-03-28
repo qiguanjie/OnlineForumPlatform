@@ -1,0 +1,19 @@
+.index_content{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /*这里由于图片高为1200，所以直接设置了1200，大家可以可以根据自己的需求进行设置*/
+    height: 1200px;
+    background-image: url("/static/img/index.jpeg");
+}
+.index_title{
+    text-align: center;
+    padding: 20% 20%;
+}
+.index_title h1{
+    font-style: italic;
+    font-size: 60px;
+    text-shadow: 0.15em 0.15em 0.1em #333;
+    font-weight: bolder;
+}
+

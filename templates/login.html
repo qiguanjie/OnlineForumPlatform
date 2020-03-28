@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+登录
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/login.css">
+{% endblock %}
+
+{% block content %}
+<div class="login_content">
+    <div class="page-header" id="page_header">
+      <h1>登录<small>Login</small></h1>
+    </div>
+    <div id="login_form">
+        <form method="post">
+            <span style=" font-size:20px;color: red" >
+                {% for item in get_flashed_messages() %}
+                {{ item }}
+                {% endfor %}
+            </span>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="Email address">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">密码</label>
+            <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="密码">
+          </div>
+          <div id="login_butt">
+              <button type="submit" class="btn btn-default">登录</button>
+              <button type="button" class="btn btn-default" onclick="location.href='{{ url_for('register') }}'">注册</button>
+          </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block login_class %}
+active
+{% endblock %}

@@ -10,6 +10,7 @@
     {% block css %}
 {#    其他页面引用样式或者js的地方#}
     {% endblock %}
+    <link rel="stylesheet" href="/static/css/base.css">
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
     <script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
@@ -44,24 +45,28 @@
                 <button type="submit" class="btn btn-default">Submit</button>
               </form>
               <ul class="nav navbar-nav navbar-right">
-                <li class="{% block register_class %}{% endblock %}"><a href="{{ url_for('register') }}">注册</a></li>
-                <li><a href="#">登录</a></li>
-{#                <li class="dropdown">#}
-{#                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>#}
-{#                  <ul class="dropdown-menu">#}
-{#                    <li><a href="#">Action</a></li>#}
-{#                    <li><a href="#">Another action</a></li>#}
-{#                    <li><a href="#">Something else here</a></li>#}
-{#                    <li role="separator" class="divider"></li>#}
-{#                    <li><a href="#">Separated link</a></li>#}
-{#                  </ul>#}
-{#                </li>#}
+                {% if email %}
+                    <li class=""><a href="{{ url_for('register') }}">注销</a></li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ nickname }} <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                      </ul>
+                    </li>
+                {% else %}
+                    <li class="{% block register_class %}{% endblock %}"><a href="{{ url_for('register') }}">注册</a></li>
+                    <li class="{% block login_class %} {% endblock %}"><a href="{{ url_for('login') }}">登录</a></li>
+                {% endif %}
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
     </div>
-    <div>
+    <div class="content" style="padding: 0;margin: 0;">
         {% block content %}
 {#        其他页面重写页面内容的地方#}
         {% endblock %}
