@@ -109,6 +109,11 @@ def logout():
     session.clear()
     return redirect(url_for(('index')))
 
+# 发布帖子
+@app.route('/post_issue')
+def post_issue():
+    return render_template('post_issue.html')
+
 
 if __name__ == '__main__':
     app.run()

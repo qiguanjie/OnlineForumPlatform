@@ -1,0 +1,38 @@
+.post_issue_content{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+#page_header{
+    text-align: center;
+}
+
+.ueditor_div{
+    height: 400px;
+}
+
+#issue_titile_div{
+    height: 35px;
+    margin: 0;
+}
+
+/*设置富文本编辑器默认的高度*/
+#edui1_iframeholder{
+    height: 200px;
+}
+
+#inputEmail3{
+    margin-left: 0;
+    padding-left: 0;
+    width: 100%;
+}
+
+#post_issue_butt{
+    margin-top: 60px;
+    text-align: center;
+    height: 35px;
+}
+
+#post_issue_butt button{
+    height: 35px;
+}

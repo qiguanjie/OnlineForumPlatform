@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+发布帖子
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/css/post_issue.css">
+    <!-- 引入配置文件 -->
+    <script src="/static/ueditor/ueditor.config.js"}></script>
+    <!-- 引入编辑器源码文件 -->
+    <script src="/static/ueditor/ueditor.all.min.js"}></script>
+{% endblock %}
+
+{% block content %}
+<div class="post_issue_content">
+    <div class="page-header" id="page_header">
+      <h1>发布帖子<small>Post issue</small></h1>
+    </div>
+    <form class="post_issue_form">
+        <div class="form-group" id="issue_titile_div">
+            <input type="text" class="form-control" name="title" id="inputEmail3" placeholder="请输入标题">
+        </div>
+        <div class="ueditor_div">
+            <script id="editor" type="text/plain">
+                请输入发布的内容!
+
+            </script>
+        </div>
+        <div id="post_issue_butt">
+          <button type="submit" class="btn btn-default">发布帖子</button>
+        </div>
+    </form>
+</div>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var editor = UE.getEditor('editor');
+</script>
+{% endblock %}
+
+{% block post_issue_class %}
+active
+{% endblock %}
