@@ -1,0 +1,12 @@
+#page_header{
+    text-align: center;
+}
+
+.register_content{
+    /*调整边距，调到相对中间的位置*/
+    margin:10% 25%;
+}
+
+#register_butt{
+    text-align: center;
+}
