@@ -7,10 +7,6 @@
     text-align: center;
 }
 
-.ueditor_div{
-    height: 400px;
-}
-
 #issue_titile_div{
     height: 35px;
     margin: 0;
@@ -28,7 +24,7 @@
 }
 
 #post_issue_butt{
-    margin-top: 60px;
+    margin-top: 20px;
     text-align: center;
     height: 35px;
 }
