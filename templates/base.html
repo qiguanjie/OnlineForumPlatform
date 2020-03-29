@@ -24,7 +24,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
                 <li class="{% block homepage_class %}{% endblock %}"><a href="{{ url_for('index') }}">首页<span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
+                <li class="{% block formula_class %}{% endblock %}"><a href="{{ url_for('formula') }}">论坛</a></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                   <ul class="dropdown-menu">

@@ -101,6 +101,7 @@ def login():
             if check_password_hash(result[0], password):
                 session['email'] = email
                 session.permanent = True
+                cur.close()
                 return redirect(url_for('index'))
             else:
                 flash("密码错误！")
@@ -158,10 +159,24 @@ def post_issue():
             db.ping(reconnect=True)
             cur.execute(sql)
             db.commit()
-            return render_template('post_issue.html')
+            cur.close()
+            return redirect(url_for('formula'))
         except Exception as e:
             raise e
 
-
+# 论坛页面
+@app.route('/formula')
+def formula():
+    if request.method == 'GET':
+        try:
+            cur = db.cursor()
+            sql = "select Issue.Ino, Issue.email,UserInformation.nickname,issue_time,Issue.title,Comment.comment from Issue,UserInformation,Comment where Issue.email = UserInformation.email and Issue.Ino = Comment.Ino order by issue_time DESC "
+            db.ping(reconnect=True)
+            cur.execute(sql)
+            issue_information = cur.fetchall()
+            cur.close()
+            return render_template('formula.html',issue_information = issue_information)
+        except Exception as e:
+            raise e
 if __name__ == '__main__':
     app.run()

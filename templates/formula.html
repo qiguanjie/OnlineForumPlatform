@@ -5,13 +5,41 @@
 {% endblock %}
 
 {% block css %}
-
+<link rel="stylesheet" href="/static/css/formula.css">
 {% endblock %}
 
 {% block content %}
 <div class="formula_content">
-    <div class="index_title">
+    <div class="page-header" id="page_header">
         <h1>帖子列表</h1>
     </div>
+    <div class="issue_list_div">
+        <ul class="issue_list_ul">
+            {% for issue in issue_information %}
+                <li class="issue_list_li">
+                    <div class="issue_div">
+                        <div class="issue_content">
+                            <h3>
+                                {{ issue[4] }}
+                            </h3>
+                            <article>
+                                {{ issue[5]|safe }}
+                            </article>
+                        </div>
+                        <div class="author_info">
+                            <p class="post-info">
+                                <span>作者：{{ issue[2] }}</span>&emsp;
+                                <span>发布时间：{{ issue[3] }}</span>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
+
+{% endblock %}
+{% block formula_class %}
+active
 {% endblock %}
