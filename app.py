@@ -178,5 +178,27 @@ def formula():
             return render_template('formula.html',issue_information = issue_information)
         except Exception as e:
             raise e
+
+# 问题详情
+@app.route('/issue/<Ino>')
+def issue_detail(Ino):
+    try:
+        if request.method == 'GET':
+            cur = db.cursor()
+            sql = "select Issue.title from Issue where Ino = '%s'" % Ino
+            db.ping(reconnect=True)
+            cur.execute(sql)
+            # 这里返回的是一个列表，即使只有一个数据，所以这里使用cur.fetchone()[0]
+            issue_title = cur.fetchone()[0]
+            sql = "select UserInformation.nickname,Comment.comment,Comment.comment_time,Comment.Cno from Comment,UserInformation where Comment.email = UserInformation.email and Ino = '%s'" % Ino
+            db.ping(reconnect=True)
+            cur.execute(sql)
+            comment = cur.fetchall()
+            cur.close()
+            # 返回视图，同时传递参数
+            return render_template('issue_detail.html',Ino=Ino,issue_title=issue_title,comment=comment)
+    except Exception as e:
+        raise e
+
 if __name__ == '__main__':
     app.run()

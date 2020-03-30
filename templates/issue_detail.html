@@ -1,37 +1,37 @@
 {% extends 'base.html' %}
 
 {% block title %}
-论坛
+    {{ issue_title }}
 {% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="/static/css/formula.css">
+    <link rel="stylesheet" href="/static/css/issue_detail.css">
+
 {% endblock %}
 
 {% block content %}
 <div class="formula_content">
     <div class="page-header" id="page_header">
-        <h1>帖子列表</h1>
+        <h1>{{ issue_title }}</h1>
     </div>
     <div class="issue_list_div">
         <ul class="issue_list_ul">
-            {% for issue in issue_information %}
+            {% for comm in comment %}
                 <li class="issue_list_li">
                     <div class="issue_div">
                         <div class="issue_content">
-                            <h3>
-                                <a href="{{ url_for('issue_detail',Ino = issue[0]) }}">
-                                    {{ issue[4] }}
-                                </a>
-                            </h3>
                             <article>
-                                {{ issue[5]|safe }}
+                                {{ comm[1]|safe }}
                             </article>
                         </div>
                         <div class="author_info">
-                            <p class="post-info">
-                                <span>作者：{{ issue[2] }}</span>&emsp;
-                                <span>发布时间：{{ issue[3] }}</span>
+{#                            <p class="cno_info">{{ comm[3] }}</p>#}
+                            <p class="info">
+                                <span class="cno_info">{{ comm[3] }}楼</span>&emsp;
+                                <span>
+                                    <span>作者：{{ comm[0] }}</span>&emsp;&emsp;
+                                    <span>发布时间：{{ comm[2] }}</span>
+                                </span>
                             </p>
                         </div>
                     </div>
@@ -40,8 +40,4 @@
         </ul>
     </div>
 </div>
-
-{% endblock %}
-{% block formula_class %}
-active
 {% endblock %}
