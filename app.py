@@ -128,6 +128,7 @@ def gengenerateID():
 
 # 发布帖子
 @app.route('/post_issue', methods=['GET', 'POST'])
+@login_limit
 def post_issue():
     if request.method == 'GET':
         return render_template('post_issue.html')
@@ -184,6 +185,7 @@ def formula():
 
 # 问题详情
 @app.route('/issue/<Ino>', methods=['GET', 'POST'])
+@login_limit
 def issue_detail(Ino):
     if request.method == 'GET':
         try:
