@@ -4,6 +4,7 @@ from config import db
 import random
 import time
 import config
+from decorators import login_limit
 
 app = Flask(__name__)
 
@@ -68,7 +69,7 @@ def register():
             else:
                 create_time = time.strftime("%Y-%m-%d %H:%M:%S")
                 sql = "insert into UserInformation(email, nickname, password, type, create_time, phone) VALUES ('%s','%s','%s','0','%s','%s')" % (
-                email, nickname, password, create_time, phone)
+                    email, nickname, password, create_time, phone)
                 db.ping(reconnect=True)
                 cur.execute(sql)
                 db.commit()
@@ -150,12 +151,12 @@ def post_issue():
                 cur.execute(sql)
                 result = cur.fetchone()
             sql = "insert into Issue(Ino, email, title, issue_time) VALUES ('%s','%s','%s','%s')" % (
-            Ino, email, title, issue_time)
+                Ino, email, title, issue_time)
             db.ping(reconnect=True)
             cur.execute(sql)
             db.commit()
             sql = "insert into Comment(Cno, Ino, comment, comment_time, email) VALUES ('%s','%s','%s','%s','%s')" % (
-            '1', Ino, comment, issue_time, email)
+                '1', Ino, comment, issue_time, email)
             db.ping(reconnect=True)
             cur.execute(sql)
             db.commit()
@@ -163,6 +164,7 @@ def post_issue():
             return redirect(url_for('formula'))
         except Exception as e:
             raise e
+
 
 # 论坛页面
 @app.route('/formula')
@@ -175,30 +177,55 @@ def formula():
             cur.execute(sql)
             issue_information = cur.fetchall()
             cur.close()
-            return render_template('formula.html',issue_information = issue_information)
+            return render_template('formula.html', issue_information=issue_information)
         except Exception as e:
             raise e
 
+
 # 问题详情
-@app.route('/issue/<Ino>')
+@app.route('/issue/<Ino>', methods=['GET', 'POST'])
 def issue_detail(Ino):
-    try:
-        if request.method == 'GET':
+    if request.method == 'GET':
+        try:
+            if request.method == 'GET':
+                cur = db.cursor()
+                sql = "select Issue.title from Issue where Ino = '%s'" % Ino
+                db.ping(reconnect=True)
+                cur.execute(sql)
+                # 这里返回的是一个列表，即使只有一个数据，所以这里使用cur.fetchone()[0]
+                issue_title = cur.fetchone()[0]
+                sql = "select UserInformation.nickname,Comment.comment,Comment.comment_time,Comment.Cno from Comment,UserInformation where Comment.email = UserInformation.email and Ino = '%s'" % Ino
+                db.ping(reconnect=True)
+                cur.execute(sql)
+                comment = cur.fetchall()
+                cur.close()
+                # 返回视图，同时传递参数
+                return render_template('issue_detail.html', Ino=Ino, issue_title=issue_title, comment=comment)
+        except Exception as e:
+            raise e
+
+    if request.method == 'POST':
+        Ino = request.values.get('Ino')
+        email = session.get('email')
+        comment = request.values.get('editorValue')
+        comment_time = time.strftime("%Y-%m-%d %H:%M:%S")
+        try:
             cur = db.cursor()
-            sql = "select Issue.title from Issue where Ino = '%s'" % Ino
+            sql = "select max(Cno) from Comment where Ino = '%s' " % Ino
             db.ping(reconnect=True)
             cur.execute(sql)
-            # 这里返回的是一个列表，即使只有一个数据，所以这里使用cur.fetchone()[0]
-            issue_title = cur.fetchone()[0]
-            sql = "select UserInformation.nickname,Comment.comment,Comment.comment_time,Comment.Cno from Comment,UserInformation where Comment.email = UserInformation.email and Ino = '%s'" % Ino
-            db.ping(reconnect=True)
+            result = cur.fetchone()
+            Cno = int(result[0]) + 1
+            Cno = str(Cno)
+            sql = "insert into Comment(Cno, Ino, comment, comment_time, email) VALUES ('%s','%s','%s','%s','%s')" % (
+            Cno, Ino, comment, comment_time, email)
             cur.execute(sql)
-            comment = cur.fetchall()
+            db.commit()
             cur.close()
-            # 返回视图，同时传递参数
-            return render_template('issue_detail.html',Ino=Ino,issue_title=issue_title,comment=comment)
-    except Exception as e:
-        raise e
+            return redirect(url_for('issue_detail',Ino = Ino))
+        except Exception as e:
+            raise e
+
 
 if __name__ == '__main__':
     app.run()

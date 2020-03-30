@@ -6,7 +6,10 @@
 
 {% block css %}
     <link rel="stylesheet" href="/static/css/issue_detail.css">
-
+    <!-- 引入配置文件 -->
+    <script src="/static/ueditor/ueditor.config.js"}></script>
+    <!-- 引入编辑器源码文件 -->
+    <script src="/static/ueditor/ueditor.all.min.js"}></script>
 {% endblock %}
 
 {% block content %}
@@ -37,7 +40,26 @@
                     </div>
                 </li>
             {% endfor %}
+                <li>
+                    <div>
+                        <form class="post_issue_form" method="post">
+                            <input type="hidden" name="Ino" value="{{ Ino }}">
+                            <div class="ueditor_div">
+                                <script id="editor" type="text/plain">
+                                请输入回复的内容!
+                                </script>
+                            </div>
+                            <div id="post_issue_butt">
+                              <button type="submit" class="btn btn-default">回复</button>
+                            </div>
+                        </form>
+                    </div>
+                </li>
         </ul>
     </div>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var editor = UE.getEditor('editor');
+</script>
 </div>
 {% endblock %}
