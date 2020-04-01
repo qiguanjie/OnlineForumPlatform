@@ -245,5 +245,42 @@ def personal():
             raise e
         return render_template('personal.html',personal_info = personal_info)
 
+
+# 修改密码
+@app.route('/change_password',methods=['GET','POST'])
+@login_limit
+def change_password():
+    if request.method == 'GET':
+        return render_template('change_password.html')
+    if request.method == 'POST':
+        old_password = request.form.get('old_password')
+        new_password1 = request.form.get('new_password1')
+        new_password2 = request.form.get('new_password2')
+        if not all([old_password,new_password1,new_password2]):
+            flash("信息填写不全！")
+            return render_template('change_password.html')
+        if new_password1 != new_password2:
+            flash("两次新密码不一致！")
+            return render_template('change_password.html')
+        email = session.get('email')
+        try:
+            cur = db.cursor()
+            sql = "select password from UserInformation where email = '%s'" % email
+            db.ping(reconnect=True)
+            cur.execute(sql)
+            password = cur.fetchone()[0]
+            if check_password_hash(password,old_password):
+                sql = "update UserInformation set password = '%s' where email = '%s'" % (new_password1,email)
+                db.ping(reconnect=True)
+                cur.execute(sql)
+                db.commit()
+                return render_template('index.html')
+            else:
+                flash("旧密码错误！")
+                return render_template('change_password.html')
+        except Exception as e:
+            raise e
+
+
 if __name__ == '__main__':
     app.run()
