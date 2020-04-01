@@ -1,0 +1,22 @@
+.personal_content{
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 5%;
+}
+#page_header{
+    text-align: center;
+}
+
+.personal_info{
+    font-size: 24px;
+    margin-left: 10%
+;
+}
+
+.personal_td{
+    width: 300px;
+}
+
+.personal_tr{
+    height: 50px;
+}

@@ -173,7 +173,7 @@ def formula():
     if request.method == 'GET':
         try:
             cur = db.cursor()
-            sql = "select Issue.Ino, Issue.email,UserInformation.nickname,issue_time,Issue.title,Comment.comment from Issue,UserInformation,Comment where Issue.email = UserInformation.email and Issue.Ino = Comment.Ino order by issue_time DESC "
+            sql = "select Issue.Ino, Issue.email,UserInformation.nickname,issue_time,Issue.title,Comment.comment from Issue,UserInformation,Comment where Issue.email = UserInformation.email and Issue.Ino = Comment.Ino and Cno = '1' order by issue_time DESC "
             db.ping(reconnect=True)
             cur.execute(sql)
             issue_information = cur.fetchall()
@@ -228,6 +228,22 @@ def issue_detail(Ino):
         except Exception as e:
             raise e
 
+
+# 个人中心
+@app.route('/personal')
+@login_limit
+def personal():
+    if request.method == 'GET':
+        email = session.get('email')
+        try:
+            cur = db.cursor()
+            sql = "select email, nickname, type, create_time, phone from UserInformation where email = '%s'" % email
+            db.ping(reconnect=True)
+            cur.execute(sql)
+            personal_info = cur.fetchone()
+        except Exception as e:
+            raise e
+        return render_template('personal.html',personal_info = personal_info)
 
 if __name__ == '__main__':
     app.run()

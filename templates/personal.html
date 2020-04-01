@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+个人中心
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/personal.css">
+{% endblock %}
+
+{% block content %}
+<div class="personal_content">
+    <div class="page-header" id="page_header">
+      <h1>个人中心<small>Personal center</small></h1>
+    </div>
+    <div class="personal_info">
+        <table>
+            <tr class="personal_tr">
+                <td class="personal_td">
+                    Email address:
+                </td>
+                <td class="personal_td">
+                    {{ personal_info[0] }}
+                </td>
+            </tr>
+            <tr class="personal_tr">
+                <td class="personal_td">
+                    昵称：
+                </td>
+                <td class="personal_td">
+                    {{ personal_info[1] }}
+                </td>
+            </tr>
+            <tr class="personal_tr">
+                <td class="personal_td">
+                    注册时间：
+                </td>
+                <td class="personal_td">
+                    {{ personal_info[3] }}
+                </td>
+            </tr>
+            <tr class="personal_tr">
+                <td class="personal_td">
+                    手机号：
+                </td>
+                <td class="personal_td">
+                    {{ personal_info[4] }}
+                </td>
+            </tr>
+            <tr class="personal_tr">
+                <td class="personal_td">
+                    用户类型：
+                </td>
+                <td class="personal_td">
+                    {% if personal_info[2] == 0 %}
+                        普通用户
+                    {% else %}
+                        管理员
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}
