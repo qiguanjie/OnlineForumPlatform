@@ -1,0 +1,25 @@
+#page_header{
+    text-align: center;
+}
+
+.issue_list_ul{
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+.author_info{
+    text-align: right;
+}
+
+.issue_div{
+    border-bottom:1px solid #eee;
+}
+
+.issue_content{
+    max-height: 200px;
+}
+.show_issue_content{
+    margin-right: 20%;
+    margin-left: 20%;
+    margin-top: 8%;
+}

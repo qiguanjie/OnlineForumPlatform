@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+已发布的帖子
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/show_issue.css">
+{% endblock %}
+
+{% block content %}
+<div class="show_issue_content">
+    <div class="page-header" id="page_header">
+        <h1>已发布的帖子列表</h1>
+    </div>
+    <div class="issue_list_div">
+        <ul class="issue_list_ul">
+            {% for issue in issue_detail %}
+                <li class="issue_list_li">
+                    <div class="issue_div">
+                        <div class="issue_content">
+                            <h3>
+                                <a href="{{ url_for('issue_detail',Ino = issue[0]) }}">
+                                    {{ issue[2] }}
+                                </a>
+                            </h3>
+                        </div>
+                        <div class="author_info">
+                            <p class="post-info">
+                                <span>发布时间：{{ issue[3] }}</span>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -41,9 +41,8 @@
                       <ul class="dropdown-menu">
                         <li><a href="{{ url_for('personal') }}">个人中心</a></li>
                         <li><a href="{{ url_for('change_password') }}">修改密码</a></li>
-                        <li><a href="#">Something else here</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="{{ url_for('show_issue') }}">已发布的帖子</a></li>
                       </ul>
                     </li>
                 {% else %}

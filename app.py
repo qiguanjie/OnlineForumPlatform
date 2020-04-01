@@ -270,16 +270,35 @@ def change_password():
             cur.execute(sql)
             password = cur.fetchone()[0]
             if check_password_hash(password,old_password):
-                sql = "update UserInformation set password = '%s' where email = '%s'" % (new_password1,email)
+                password = generate_password_hash(new_password1, method="pbkdf2:sha256", salt_length=8)
+                sql = "update UserInformation set password = '%s' where email = '%s'" % (password,email)
                 db.ping(reconnect=True)
                 cur.execute(sql)
                 db.commit()
+                cur.close()
                 return render_template('index.html')
             else:
                 flash("旧密码错误！")
                 return render_template('change_password.html')
         except Exception as e:
             raise e
+
+# 查看已发布的帖子
+@app.route('/show_issue')
+@login_limit
+def show_issue():
+    if request.method == 'GET':
+        email = session.get('email')
+        try:
+            cur = db.cursor()
+            sql = "select ino, email, title, issue_time from Issue where email = '%s' order by issue_time desc" % email
+            db.ping(reconnect=True)
+            cur.execute(sql)
+            issue_detail = cur.fetchall()
+        except Exception as e:
+            raise e
+        return render_template('show_issue.html',issue_detail=issue_detail)
+
 
 
 if __name__ == '__main__':
