@@ -1,0 +1,16 @@
+.post_file_content{
+    margin-top: 8%;;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+#page_header{
+    text-align: center;
+}
+
+#file_table td{
+    width: 200px;
+}
+#login_butt{
+    text-align: center;
+}
