@@ -25,6 +25,10 @@
               <ul class="nav navbar-nav">
                 <li class="{% block index_class %}{% endblock %}"><a href="{{ url_for('index') }}">首页<span class="sr-only">(current)</span></a></li>
                 <li class="{% block formula_class %}{% endblock %}"><a href="{{ url_for('formula') }}">论坛</a></li>
+                <li class="{% block source_class %}{% endblock %}"><a href="{{ url_for('source') }}">资源专区</a></li>
+                {% if email %}
+                    <li class="{% block post_file_class %}{% endblock %}"><a href="{{ url_for('post_file') }}">上传资源</a></li>
+                {% endif %}
               </ul>
               <form class="navbar-form navbar-left">
                 <div class="form-group">

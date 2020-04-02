@@ -1,10 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}
+资源专区
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/source.css">
+{% endblock %}
+
+{% block content %}
+<div class="source_content">
+    <div class="page-header" id="page_header">
+      <h1>资源专区<small>Resources Zone</small></h1>
+    </div>
+    <div class="source_div">
+        <ul class="source_ul">
+            {% for file in files %}
+                <li class="issue_list_li">
+                    <div class="issue_div">
+                        <div class="issue_content">
+                            <h3>
+                                <a href="{{ url_for('online_file',Fno = file[0]) }}">
+                                    {{ file[1] }}
+                                </a>
+                            </h3>
+                            <article>
+                                {{ file[2] }}
+                            </article>
+                        </div>
+                        <div class="author_info">
+                            <p class="post-info">
+                                <span>上传者：{{ file[4] }}</span>&emsp;&emsp;
+                                <span>上传时间：{{ file[3] }}</span>&emsp;
+                                <span><a href="{{ url_for('online_file',Fno = file[0]) }}">在线查看</a></span>&emsp;
+                                <span><a href="{{ url_for('download',Fno = file[0]) }}">下载文件</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
+{% block source_class %}
+active
+{% endblock %}

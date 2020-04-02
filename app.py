@@ -349,7 +349,7 @@ def post_file():
             cur.execute(sql)
             db.commit()
             cur.close()
-            return render_template('index.html')
+            return redirect(url_for('source'))
         except Exception as e:
             raise e
 
@@ -368,6 +368,15 @@ def source():
         except Exception as e:
             raise e
 
+# 在线查看文件
+@app.route('/online_file/<Fno>')
+def online_file(Fno):
+    return send_from_directory(os.path.join('store'), Fno)
+
+# 文件下载功能
+@app.route('/download/<Fno>')
+def download(Fno):
+    return send_file(os.path.join('store') + "/" + Fno, as_attachment=True)
 
 if __name__ == '__main__':
     app.run()
