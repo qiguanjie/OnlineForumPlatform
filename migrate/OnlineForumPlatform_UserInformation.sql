@@ -1,0 +1,1 @@
+INSERT INTO OnlineForumPlatform.UserInformation (email, nickname, password, type, create_time, phone) VALUES ('1@qq.com', '测试用户', 'pbkdf2:sha256:150000$4gAgZ5e7$89dfaaa841f269f251058583f00d7839e50b089f1ca686962630cabbee919493', 0, '2020-03-28 08:44:38', '13888888888');
