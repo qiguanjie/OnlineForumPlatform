@@ -107,4 +107,5 @@ class Captcha(object):
             image.save(fp)
         return (captcha_str,image)
 
-Captcha.generate_graph_captcha()
+# 返回验证码文本
+print(Captcha.generate_graph_captcha()[1])
